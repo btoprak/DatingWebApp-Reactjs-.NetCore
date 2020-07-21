@@ -1,0 +1,41 @@
+.card:hover img{
+    transform: scale(1.0,1.0);
+    transition-duration:500ms;
+    transition-timing-function:ease-out ;
+}
+
+.img-thumbnail{
+    margin:7%;
+    width: 85%;
+    height: 85%;
+}
+
+.card-body{
+    padding:0 25px;
+}
+
+.card-footer{
+    padding:10px 15px;
+    background-color: #fff;
+    border-top: none;
+}
+
+.tabs a{
+    color:orange;
+    font-weight: 500;
+}
+
+.tabs-container{
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+p{
+    font-weight: 500;
+}
+
+.image-gallery-content{
+    width: 80%;
+    left:10%;
+}
