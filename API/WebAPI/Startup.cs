@@ -66,9 +66,7 @@ namespace WebAPI
             {
                 opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });
-            services.AddScoped<IAuthService, AuthManager>();
-            services.AddScoped<IAuthDal, EfAuthDal>();
-
+            
             services.AddScoped<IDatingService, DatingManager>();
             services.AddScoped<IDatingDal, EfDatingDal>();
 

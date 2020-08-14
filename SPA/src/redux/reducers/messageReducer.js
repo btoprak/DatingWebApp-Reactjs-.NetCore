@@ -1,11 +1,11 @@
 import {
-    GET_MESSAGES, GET_MESSAGE_THREAD, SEND_MESSAGE
+    GET_MESSAGES, GET_MESSAGE_THREAD, SEND_MESSAGE, DELETE_MESSAGE
 } from "../actions/actionsTypes"
 import { updateObject } from "../../utility/updateObject";
 
 const initState = {
     messages: [],
-    messageThread: null,
+    messageThread: [],
     pagination: null,
     loading: false,
     message: null,
@@ -30,6 +30,12 @@ const sendMessageSuccess = (state, action) => {
     })
 };
 
+const deleteMessageSuccess = (state, action) => {
+    return updateObject(state, {
+        message: action.payload
+    })
+};
+
 export default function messageReducer(state = initState, action) {
     switch (action.type) {
         case GET_MESSAGES:
@@ -38,6 +44,8 @@ export default function messageReducer(state = initState, action) {
             return getMessageThreadSuccess(state, action);
         case SEND_MESSAGE:
             return sendMessageSuccess(state, action);
+        case DELETE_MESSAGE:
+            return deleteMessageSuccess(state, action);
         default:
             return state;
     }

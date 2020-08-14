@@ -12,7 +12,7 @@ namespace DataAccess.Concrete
     public class EfEntityRepositoryBase<TEntity> : IEntityRepository<TEntity>
     where TEntity : class, IEntity, new()
     {
-        internal DatingContext context;
+        protected DatingContext context;
       
         public EfEntityRepositoryBase(DatingContext context)
         {

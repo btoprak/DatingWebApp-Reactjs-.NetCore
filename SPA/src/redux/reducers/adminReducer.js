@@ -1,5 +1,5 @@
 import {
-    GET_USERS_WITH_ROLES, EDIT_ROLES
+    GET_USERS_WITH_ROLES
 } from "../actions/actionsTypes"
 import { updateObject } from "../../utility/updateObject";
 

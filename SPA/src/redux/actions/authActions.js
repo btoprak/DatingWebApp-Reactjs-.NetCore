@@ -40,6 +40,7 @@ export const registerUser = userData => dispatch => {
 // LOGIN
 export const loginUser = userData => dispatch => {
     dispatch(loginStart());
+    debugger;
     axios.post('https://localhost:44398/api/auth/login', userData)
         .then(res => {
             const { token } = res.data

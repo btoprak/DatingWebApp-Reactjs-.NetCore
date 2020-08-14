@@ -31,6 +31,7 @@ const authReducer = (state = initState, action) => {
         case LOGIN_SUCCESS:
             return loginSuccess(state, action);
         case LOGIN_ERROR:
+            debugger;
             return {
                 ...state,
                 authuser: '',

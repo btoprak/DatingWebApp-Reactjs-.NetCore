@@ -29,6 +29,22 @@ class MessageThread extends Component {
         }
     }
 
+    getSnapshotBeforeUpdate = (prevProps) => {
+        const { message } = this.props;
+        if (prevProps.message !== message) {
+            return true;
+        }
+        return false;
+    };
+
+    componentDidUpdate = (prevProps, prevState, snapshot) => {
+        const recipientId = this.props.recipientId;
+        const userId = this.props.authUser.id
+        if (snapshot) {
+            this.props.actions.getMessageThread(userId, recipientId);
+        }
+    };
+
     handleChange(e) {
         e.preventDefault();
         this.setState({ [e.target.name]: e.target.value });
@@ -43,12 +59,13 @@ class MessageThread extends Component {
         }
         const userId = this.props.authUser.id
         await this.props.actions.sendMessage(userId, data);
-        await this.props.actions.getMessageThread(userId, recipientId);
+
         var form = document.getElementById("sendMessageForm");
         form.reset();
     }
 
     render() {
+        console.log("asd");
         return (
             <div>
                 <div className="card">
@@ -119,7 +136,8 @@ class MessageThread extends Component {
 const mapStateToProps = state => {
     return {
         messageThread: state.messageReducer.messageThread,
-        authUser: state.authReducer.user
+        authUser: state.authReducer.user,
+        message: state.messageReducer.message
     };
 };
 

@@ -23,13 +23,23 @@ class MessageList extends Component {
         const userId = this.props.authUser.id;
         const { currentPage, pageSize, messageContainer } = this.state;
         await this.props.actions.getMessages(userId, currentPage, pageSize, messageContainer);
+        this.setState({ messages: this.props.messages });
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.message !== this.props.message || prevState.currentPage !== this.state.currentPage
+            || prevState.messageContainer !== this.state.messageContainer) {
+            const userId = this.props.authUser.id;
+            const { currentPage, pageSize, messageContainer } = this.state;
+            this.props.actions.getMessages(userId, currentPage, pageSize, messageContainer);
+        }
     }
 
     getMessages = (messageContainer) => {
-        const userId = this.props.authUser.id;
+        // const userId = this.props.authUser.id;
         this.setState({ messageContainer: messageContainer, pages: [] })
-        const { currentPage, pageSize } = this.state
-        this.props.actions.getMessages(userId, currentPage, pageSize, messageContainer);
+        // const { currentPage, pageSize } = this.state
+        // this.props.actions.getMessages(userId, currentPage, pageSize, messageContainer);
     }
 
     deleteMessage = (message) => {
@@ -37,6 +47,10 @@ class MessageList extends Component {
         alertify.confirm('Are you sure you want to delete this message', () => {
             this.props.actions.deleteMessage(userId, message);
         })
+    }
+
+    paginate = pageNumber => {
+        this.setState({ currentPage: pageNumber })
     }
 
     render() {
@@ -53,6 +67,7 @@ class MessageList extends Component {
                 }
             }
         }
+
         return (
             <div>
                 <div className="container mt-5">
@@ -136,7 +151,8 @@ const mapStateToProps = state => {
     return {
         messages: state.messageReducer.messages,
         pagination: state.messageReducer.pagination,
-        authUser: state.authReducer.user
+        authUser: state.authReducer.user,
+        message: state.messageReducer.message
     };
 };
 
